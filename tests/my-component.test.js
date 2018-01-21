@@ -17,6 +17,15 @@ const Character = function (options = {}) {
     return {getLife, getWeapon};
 };
 
+const Player = function (options = {}) {
+    const {armor = 50} = options;
+    const getArmor = function () {
+        return armor;
+    };
+
+    return Object.assign(Object.create(Character()), {getArmor});
+};
+
 const Ammunition = function (options = {}) {
     const {damage = 4} = options;
     const stats = {damage};
@@ -117,6 +126,18 @@ test(`-------- Testing demon with weapon...`, (assert) => {
     const actual = demon.getWeapon().getStats();
 
     assert.deepEqual(actual, expected, message);
+
+    assert.end();
+});
+test(`-------- Testing player's creation...`, (assert) => {
+    const message = `Retrieving generic player's life`;
+    const expected = 100;
+
+    const player = Player();
+
+    const actual = player.getLife();
+
+    assert.equal(actual, expected, message);
 
     assert.end();
 });
