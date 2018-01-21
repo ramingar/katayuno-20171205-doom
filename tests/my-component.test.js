@@ -53,8 +53,8 @@ const WEAPONS = {
 };
 
 const Weapon = function (options = {}) {
-    const {ammo, ammoPerShot} = options;
-    const stats = {ammo, ammoPerShot};
+    const {name, ammo, ammoPerShot} = options;
+    const stats = {name, ammo, ammoPerShot};
 
     const getStats = function () {
         return stats;
@@ -122,10 +122,10 @@ test(`-------- Testing ammunition's constructor...`, (assert) => {
 
 test(`-------- Testing weapon's constructor...`, (assert) => {
     const message = `Retrieving generic weapon stats`;
-    const expected = {ammo: {type: 'none', damage: 4}, ammoPerShot: null};
+    const expected = {name: 'generic', ammo: {type: 'none', damage: 4}, ammoPerShot: null};
 
     const ammo = Ammunition({damage: 4});
-    const weapon = Weapon({ammo, ammoPerShot: null});
+    const weapon = Weapon({name: 'generic', ammo, ammoPerShot: null});
 
     const actual = weapon.getStats();
 
@@ -136,10 +136,10 @@ test(`-------- Testing weapon's constructor...`, (assert) => {
 
 test(`-------- Testing demon with weapon...`, (assert) => {
     const message = `Retrieving generic weapon from a generic demon`;
-    const expected = {ammo: {type: 'none', damage: 50}, ammoPerShot: null};
+    const expected = {name: 'fists', ammo: {type: 'none', damage: 50}, ammoPerShot: null};
 
     const ammo = Ammunition({damage: 50});
-    const weapon = Weapon({ammo, ammoPerShot: null});
+    const weapon = Weapon({name: 'fists', ammo, ammoPerShot: null});
     const demon = Character({life: 100, weapon});
 
     const actual = demon.getWeapon().getStats();
